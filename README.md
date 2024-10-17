@@ -26,5 +26,5 @@ OpenWeather API: External weather data provider.
 Running the App
 
 To start the application in development mode (with hot reloading), run:
-
+npm install
 npm run dev

@@ -93,7 +93,9 @@
 .nav_bar ul li div {
   cursor: pointer;
 }
-
+.nav_bar ul li:hover {
+ color: #abafb6; 
+}
 /* Hamburger Menu (hidden by default on larger screens) */
 .hamburger {
   display: none;
@@ -102,10 +104,14 @@
 }
 
 /* Dropdown menu styling for small screens */
+.humburger_menu_dropdown{
+  display: none;
+
+}
 .dropdown-menu {
   display: none;
   flex-direction: column;
-  background-color: #0077b6;
+  background-color: #2e3b52;
   position: absolute;
   top: 70px; /* Position just below the navbar */
   right: 10px;
@@ -127,6 +133,9 @@
 .dropdown-menu.show {
   display: flex;
 }
+.dropdown-menu ul li:hover {
+  color: #abafb6; 
+ }
 
 /* Search form inside the box */
 .box form {
@@ -173,7 +182,7 @@
   .nav_bar .app_name {
     display: none; /* Hide app name */
   }
-
+  
   .nav_bar ul {
     display: none; /* Hide navigation links */
   }
@@ -181,12 +190,17 @@
   .hamburger {
     display: block; /* Show hamburger menu */
   }
+  .humburger_menu_dropdown{
+    display: block;
+  
+  }
 
   .nav_bar form {
     flex-grow: 1;
     justify-content: flex-end;
     margin: 3px;
   }
+
 }
 
 /* Current Weather Details Box */

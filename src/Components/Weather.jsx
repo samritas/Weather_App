@@ -113,14 +113,16 @@ const Weather = () => {
             &#9776;
           </div>
           {/* Dropdown Menu for small screens */}
-          {/* <ul className={`dropdown-menu ${menuOpen ? "show" : ""}`}>
+          <div className="humburger_menu_dropdown">
+          <ul className={`dropdown-menu ${menuOpen ? "show" : ""}`}>
             <li>
               <div className="dropdown_item">Home</div>
             </li>
             <li>
               <div className="dropdown_item">About</div>
             </li>
-          </ul> */}
+          </ul>
+          </div>
         </nav>
 
         <div className="current-weather-details-box">
