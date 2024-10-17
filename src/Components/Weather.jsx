@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import Icon from "react-icons-kit";
 import { search } from "react-icons-kit/feather/search";
@@ -13,11 +12,6 @@ import { SphereSpinner } from "react-spinners-kit";
 
 const Weather = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
-  // redux state
   const {
     citySearchLoading,
     citySearchData,
@@ -25,33 +19,26 @@ const Weather = () => {
     forecastData,
     forecastError,
   } = useSelector((state) => state.weather);
-
-  // main loadings state
   const [loadings, setLoadings] = useState(true);
-
-  // check if any of redux loading state is still true
   const allLoadings = [citySearchLoading, forecastLoading];
+  const [city, setCity] = useState("Ethiopia");
+  const [unit, setUnit] = useState("metric");
+  const dispatch = useDispatch();
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   useEffect(() => {
     const isAnyChildLoading = allLoadings.some((state) => state);
     setLoadings(isAnyChildLoading);
   }, [allLoadings]);
 
-  // city state
-  const [city, setCity] = useState("Ethiopia");
-
-  // unit state
-  const [unit, setUnit] = useState("metric"); // metric = C and imperial = F
-
-  // toggle unit
   const toggleUnit = () => {
     setLoadings(true);
     setUnit(unit === "metric" ? "imperial" : "metric");
   };
 
-  // dispatch
-  const dispatch = useDispatch();
-
-  // fetch data
   const fetchData = () => {
     dispatch(
       getCityData({
@@ -71,19 +58,16 @@ const Weather = () => {
     });
   };
 
-  // initial render
   useEffect(() => {
     fetchData();
   }, [unit]);
 
-  // handle city search
   const handleCitySearch = (e) => {
     e.preventDefault();
     setLoadings(true);
     fetchData();
   };
 
-  // function to filter forecast data based on the time of the first object
   const filterForecastByFirstObjTime = (forecastData) => {
     if (!forecastData) {
       return [];
@@ -98,13 +82,10 @@ const Weather = () => {
   return (
     <div className="background">
       <div className="box">
-        {/* city search form */}
         <nav className="nav_bar">
           <div className="app_name">
             <h1>Weather App</h1>
           </div>
-
-          {/* Navigation Links */}
           <ul className="">
             <li>
               <div className="">Home</div>
@@ -142,14 +123,10 @@ const Weather = () => {
           </ul> */}
         </nav>
 
-        {/* current weather details box */}
         <div className="current-weather-details-box">
-          {/* header */}
           <div className="details-box-header">
-            {/* heading */}
             <h4>Current Weather</h4>
 
-            {/* switch */}
             <div className="switch" onClick={toggleUnit}>
               <div
                 className={`switch-toggle ${unit === "metric" ? "c" : "f"}`}
@@ -165,7 +142,9 @@ const Weather = () => {
           ) : (
             <>
               {citySearchData && citySearchData.error ? (
-                <div className="error-msg">City not found .Please try again!</div>
+                <div className="error-msg">
+                  City not found .Please try again!
+                </div>
               ) : (
                 <>
                   {forecastError ? (
@@ -174,7 +153,6 @@ const Weather = () => {
                     <>
                       {citySearchData && citySearchData.data ? (
                         <div className="weather-details-container">
-                          {/* details */}
                           <div className="details">
                             <h4 className="city-name">
                               {citySearchData.data.name}
@@ -193,15 +171,12 @@ const Weather = () => {
                             </h4>
                           </div>
 
-                          {/* metrices */}
                           <div className="metrices">
-                            {/* feels like */}
                             <h4>
                               Feels like {citySearchData.data.main.feels_like}
                               &deg;C
                             </h4>
 
-                            {/* min max temp */}
                             <div className="key-value-box">
                               <div className="key">
                                 <Icon
@@ -227,7 +202,6 @@ const Weather = () => {
                               </div>
                             </div>
 
-                            {/* humidity */}
                             <div className="key-value-box">
                               <div className="key">
                                 <Icon
@@ -244,7 +218,6 @@ const Weather = () => {
                               </div>
                             </div>
 
-                            {/* wind */}
                             <div className="key-value-box">
                               <div className="key">
                                 <Icon icon={wind} size={20} className="icon" />
@@ -255,7 +228,6 @@ const Weather = () => {
                               </div>
                             </div>
 
-                            {/* pressure */}
                             <div className="key-value-box">
                               <div className="key">
                                 <Icon
@@ -277,7 +249,7 @@ const Weather = () => {
                       ) : (
                         <div className="error-msg">No Data Found</div>
                       )}
-                      {/* extended forecastData */}
+
                       <h4 className="extended-forecast-heading">
                         Extended Forecast
                       </h4>
